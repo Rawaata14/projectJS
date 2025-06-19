@@ -18,66 +18,16 @@ body {
 .custom-navbar {
     width: 100%;
     max-width: 900px;
-    background-color: #4a90e2;
+    background-color: #a9cfc9;
     border-radius: 8px;
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #fff;
+    color: #419e8c;
     box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
     margin-bottom: 30px;
     flex-wrap: wrap;
-}
-
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-.popup-overlay.show {
-    display: flex;
-
-}
-
-.popup-box {
-    background: #fff;
-    padding: 30px 40px;
-    border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-}
-
-.popup-close {
-    position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 24px;
-    color: #999;
-    text-decoration: none;
-}
-
-.popup-close:hover {
-    color: #e74c3c;
-}
-
-.popup-box img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin: 20px 0;
 }
 
 .navbar-brand {
@@ -94,7 +44,7 @@ body {
 }
 
 .navbar-links li a {
-    color: #f0f4f8;
+    color: #419e8c;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -130,7 +80,14 @@ body {
 .search-container {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    padding-left: 10px;
+}
+
+.search-group-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
@@ -193,6 +150,7 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .contact-info {
@@ -202,21 +160,7 @@ body {
 
 .contact-name {
     font-weight: bold;
-}
-
-.contact-actions {
-    display: flex;
-    gap: 10px;
-}
-
-.action-icon {
-    text-decoration: none;
-    font-size: 18px;
-    transition: transform 0.2s ease;
-}
-
-.action-icon:hover {
-    transform: scale(1.2);
+    font-size: 1.1rem;
 }
 
 .contact-phone,
@@ -225,15 +169,71 @@ body {
     color: #555;
 }
 
-.contact-delete {
-    color: #e74c3c;
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: color 0.3s ease;
+.contact-actions {
+    display: flex;
+    gap: 10px;
 }
 
-.contact-delete:hover {
-    color: #c0392b;
+.list-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.action-icon {
+    text-decoration: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.action-icon:hover {
+    transform: scale(1.2);
+}
+
+/* CONTACT DETAILS CARD */
+.contact-details-card {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.card-box {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    text-align: center;
+    max-width: 350px;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.card-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 /* FORM */
@@ -274,15 +274,15 @@ body {
     box-shadow: 0 0 10px rgba(74, 144, 226, 0.4);
 }
 
-.btn-primary {
-    background-color: #4a90e2;
+.add-contact-btn {
+    background-color: #a9cfc9;
     border: none;
     border-radius: 12px;
     padding: 10px 30px;
-    color: white;
+    color: #419e8c;
     font-weight: 700;
     cursor: pointer;
-    font-size: 1.0rem;
+    font-size: 1rem;
     align-self: center;
     margin-top: auto;
     box-shadow: 0 6px 18px rgba(74, 144, 226, 0.4);
@@ -291,8 +291,8 @@ body {
     margin-top: 20px;
 }
 
-.btn-primary:hover {
-    background-color: #357abd;
+.add-contact-btn:hover {
+    background-color: #d1e3ff;
 }
 
 /* FOOTER */
@@ -325,5 +325,18 @@ body {
 
     .btn-primary {
         padding: 10px 0;
+        margin-left: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }

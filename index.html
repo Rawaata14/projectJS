@@ -1,15 +1,17 @@
+<!DOCTYPE html>
 <html lang="en" ng-app="phonebook">
 
 <head>
     <meta charset="UTF-8">
     <title>Phone Book</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="JavaScript.js"></script>
 </head>
 
 <body ng-controller="appController">
+
     <!-- Navbar -->
     <nav class="custom-navbar">
         <div class="navbar-brand">📞 My Phone Book</div>
@@ -27,103 +29,89 @@
                 <h3 class="text-center">Phone Book</h3>
             </div>
             <div class="panel-body">
+                <!-- Search and Filter -->
                 <div class="search-container">
-                    <div class="search-group">
-                        <label>Search:</label>
-                        <input type="text" ng-model="searchContact" class="form-control">
-                    </div>
-                    <div class="search-group">
-                        <label>No. of contacts to show:</label>
-                        <input type="number" step="1" min="0" ng-model="rowLimit" class="form-control number-input">
+                    <div class="search-group-row">
+                        <div class="search-group">
+                            <label>Search:</label>
+                            <input type="text" ng-model="searchContact" class="form-control">
+                        </div>
+                        <div class="search-group">
+                            <label>No. of contacts to show:</label>
+                            <input type="number" step="1" min="0" ng-model="rowLimit" class="form-control number-input">
+                        </div>
+                        <div class="list-actions" style="margin-top: 10px;">
+                            <a href="" title="Delete Contacts" class="action-icon" ng-click="clearContacts()">🗑️</a>
+                            <a href="" title="Edit Contact" class="action-icon" ng-click="editList()">✏️</a>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Contacts List -->
                 <div class="contacts-list">
                     <ul>
-                        <li class="contact-item">
-                            <img src="photos/Alice.jpg" alt="Alice Johnson" class="contact-photo">
+                        <li class="contact-item"
+                            ng-repeat="contact in contacts | filter:searchContact | limitTo:rowLimit">
+                            <img ng-src="{{contact.photo}}" alt="{{contact.name}}" class="contact-photo">
                             <div class="contact-info">
-                                <div class="contact-name">Alice Johnson</div>
-                                <div class="contact-phone">052-345-6789</div>
-                                <div class="contact-email">alice@example.com</div>
+                                <div class="contact-name">{{contact.name}}</div>
+                                <div class="contact-phone">{{contact.phone}}</div>
+
                             </div>
                             <div class="contact-actions">
-                                <a href="#popup-alice" title="View Details" class="action-icon">🔍</a>
-                                <a href="#" title="Edit Contact" class="action-icon">✏️</a>
-                                <a href="#" title="Delete Contact" class="action-icon">🗑️</a>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <img src="photos/Bob.jpg" alt="Bob Smith" class="contact-photo">
-                            <div class="contact-info">
-                                <div class="contact-name">Bob Smith</div>
-                                <div class="contact-phone">03-567-1234</div>
-                                <div class="contact-email">bob@example.com</div>
-                            </div>
-                            <div class="contact-actions">
-                                <a href="#popup-alice" title="View Details" class="action-icon">🔍</a>
-                                <a href="#" title="Edit Contact" class="action-icon">✏️</a>
-                                <a href="#" title="Delete Contact" class="action-icon">🗑️</a>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <img src="photos/Charlie.jpg" alt="Charlie Davis" class="contact-photo">
-                            <div class="contact-info">
-                                <div class="contact-name">Charlie Davis</div>
-                                <div class="contact-phone">054-789-4321</div>
-                                <div class="contact-email">charlie@example.com</div>
-                            </div>
-                            <div class="contact-actions">
-                                <a href="#popup-alice" title="View Details" class="action-icon">🔍</a>
-                                <a href="#" title="Edit Contact" class="action-icon">✏️</a>
-                                <a href="#" title="Delete Contact" class="action-icon">🗑️</a>
-                            </div>
-                        </li>
-                        <li class="contact-item">
-                            <img src="photos/Diana.jpg" alt="Diana Prince" class="contact-photo">
-                            <div class="contact-info">
-                                <div class="contact-name">Diana Prince</div>
-                                <div class="contact-phone">02-901-2345</div>
-                                <div class="contact-email">diana@example.com</div>
-                            </div>
-                            <div class="contact-actions">
-                                <a href="#popup-alice" title="View Details" class="action-icon">🔍</a>
-                                <a href="#" title="Edit Contact" class="action-icon">✏️</a>
-                                <a href="#" title="Delete Contact" class="action-icon">🗑️</a>
+                                <a href="" title="View Details" class="action-icon"
+                                    ng-click="showDetails(contact); $event.preventDefault()">🔍</a>
+                                <a href="" title="Edit Contact" class="action-icon"
+                                    ng-click="$event.preventDefault()">✏️</a>
+                                <a href="" title="Delete Contact" class="action-icon"
+                                    ng-click="$event.preventDefault()">🗑️</a>
                             </div>
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="popup-overlay show">
-                <div class="popup-box">
-                    <a href="#" class="popup-close">&times;</a>
-                    <h2>Alice Johnson</h2>
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Alice Johnson">
-                    <p><strong>Phone:</strong> 052-345-6789</p>
-                    <p><strong>Email:</strong> alice@example.com</p>
+
+                <!-- Contact Details Card (only one) -->
+                <div class="contact-details-card" ng-if="selectedContact">
+                    <div class="card-box">
+                        <button class="close-btn" ng-click="closeDetails()">×</button>
+                        <img ng-src="{{selectedContact.photo}}" alt="{{selectedContact.name}}" class="card-photo">
+                        <h2>{{selectedContact.name}}</h2>
+                        <p><strong>Phone:</strong> {{selectedContact.phone}}</p>
+                        <p><strong>Email:</strong> {{selectedContact.email}}</p>
+
+                        <div class="details-actions">
+                            <a href="" class="action-icon" title="Edit Contact">✏️</a>
+                            <a href="" class="action-icon" title="Delete Contact">🗑️</a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
+            <!-- Add Contact Form -->
             <div class="panel-body-form">
-                <form class="form-inline">
+                <form class="form-inline" ng-submit="$event.preventDefault(); addContact();">
                     <div class="form-group">
                         <span>Name:</span>
-                        <input type="text" class="form-control" ng-model="newName" maxlength="99">
+                        <input type="text" class="form-control" ng-model="newName" maxlength="99" required>
                     </div>
                     <div class="form-group">
                         <span>Phone:</span>
                         <input type="tel" class="form-control" placeholder="xx-xxx-xxxx" ng-model="newPhone"
-                            ng-pattern="/^\d{2}-\d{3}-\d{4}$/">
+                            ng-pattern="/^\d{2}-\d{3}-\d{4}$/" required>
                     </div>
                     <div class="form-group">
                         <span>Email:</span>
-                        <input type="email" class="form-control" ng-model="newEmail" placeholder="email@example.com">
+                        <input type="email" class="form-control" ng-model="newEmail" placeholder="email@example.com"
+                            required>
                     </div>
-                    <button type="button" class="btn btn-primary" ng-click="addContact()">
+                    <button type="submit" class="add-contact-btn">
                         <span class="glyphicon glyphicon-thumbs-up"></span> Add Contact
                     </button>
                 </form>
             </div>
+
+            <!-- Footer -->
             <div class="panel-footer">
                 <div class="copyright">
                     &copy; 2025 My Phone Book. All rights reserved.
@@ -131,6 +119,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
