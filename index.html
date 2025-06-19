@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Phone Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="custom-navbar">
+        <div class="navbar-brand">📞 My Phone Book</div>
+        <ul class="navbar-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3>Phone Book</h3>
+            </div>
+
+            <div class="panel-body">
+                <!-- Search and Filters -->
+                <div class="search-container">
+                    <div class="search-group-row">
+                        <div class="search-group">
+                            <label for="searchInput">Search:</label>
+                            <input type="text" id="searchInput" class="form-control" placeholder="Search by name" />
+                        </div>
+                        <div class="search-group">
+                            <label for="rowLimit">No. of contacts to show:</label>
+                            <input type="number" id="rowLimit" min="0" step="1" class="form-control number-input"
+                                placeholder="All" />
+                        </div>
+                        <div class="list-actions">
+                            <a href="" id="clearBtn" title="Delete All Contacts" style="font-size:20px; cursor:pointer;"
+                                class="action-icon">🗑️</a>
+                            <a href="" id="restoreBtn" title="Restore Contacts" style="font-size:20px; cursor:pointer;"
+                                class="action-icon">↺</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contacts-list">
+                    <ul>
+                        <li class="contact-item">
+                            <img src="photos/Alice.jpg" alt="Alice Johnson" class="contact-photo" />
+                            <div class="contact-info">
+                                <div class="contact-name">Alice Johnson</div>
+                                <div class="contact-phone">052-345-6789</div>
+                            </div>
+                            <div class="contact-actions">
+                                <a href="" title="View Details" class="action-icon">🔍</a>
+                                <a href="" title="Edit Contact" class="action-icon">✏️</a>
+                                <a href="" title="Delete Contact" class="action-icon">🗑️</a>
+                            </div>
+                        </li>
+
+                        <li class="contact-item">
+                            <img src="photos/Bob.jpg" alt="Bob Smith" class="contact-photo" />
+                            <div class="contact-info">
+                                <div class="contact-name">Bob Smith</div>
+                                <div class="contact-phone">03-567-1234</div>
+                            </div>
+                            <div class="contact-actions">
+                                <a href="" title="View Details" class="action-icon">🔍</a>
+                                <a href="" title="Edit Contact" class="action-icon">✏️</a>
+                                <a href="" title="Delete Contact" class="action-icon">🗑️</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <img src="photos/Charlie.jpg" alt="Charlie Davis" class="contact-photo">
+                            <div class="contact-info">
+                                <div class="contact-name">Charlie Davis</div>
+                                <div class="contact-phone">054-789-4321</div>
+                            </div>
+                            <div class="contact-actions">
+                                <a href="" title="View Details" class="action-icon">🔍</a>
+                                <a href="" title="Edit Contact" class="action-icon">✏️</a>
+                                <a href="" title="Delete Contact" class="action-icon">🗑️</a>
+                            </div>
+                        </li>
+                        <li class="contact-item">
+                            <img src="photos/Diana.jpg" alt="Diana Prince" class="contact-photo">
+                            <div class="contact-info">
+                                <div class="contact-name">Diana Prince</div>
+                                <div class="contact-phone">02-901-2345</div>
+                            </div>
+                            <div class="contact-actions">
+                                <a href="" title="View Details" class="action-icon">🔍</a>
+                                <a href="" title="Edit Contact" class="action-icon">✏️</a>
+                                <a href="" title="Delete Contact" class="action-icon">🗑️</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Contact Details Card -->
+                <div class="contact-details-card" id="contactDetails">
+                    <div class="card-box">
+                        <button class="close-btn" id="closeDetails">×</button>
+                        <img id="detailPhoto" class="card-photo" src="" alt="Contact photo" />
+                        <h2 id="detailName"></h2>
+                        <p><strong>Phone:</strong> <span id="detailPhone"></span></p>
+                        <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+                        <div class="card-actions">
+                            <span title="Edit" class="action-icon edit-icon">✏️</span>
+                            <span title="Delete" class="action-icon delete-icon">🗑️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Contact Form -->
+            <div class="panel-body-form">
+                <form id="addContactForm" class="form-inline">
+                    <div class="form-group">
+                        <span>Name:</span>
+                        <input type="text" id="newName" maxlength="99" required />
+                    </div>
+                    <div class="form-group">
+                        <span>Phone:</span>
+                        <input type="tel" id="newPhone" placeholder="xxx-xxx-xxxx" pattern="^\d{2}-\d{3}-\d{4}$"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <span>Email:</span>
+                        <input type="email" id="newEmail" placeholder="email@example.com" required />
+                    </div>
+                    <button type="submit" class="add-contact-btn">
+                        Add Contact
+                    </button>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="panel-footer">
+                <div class="copyright">&copy; 2025 My Phone Book. All rights reserved.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="JavaScript.js"></script>
+</body>
+
+</html>
